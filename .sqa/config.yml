@@ -1,0 +1,70 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.7
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/ecmwf/climetlab:
+      branch: develop
+      repo: https://github.com/ecmwf/climetlab
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/ecmwf/climetlab git:
+        commands:
+        - /usr/bin/env sh .sqa/script.clammy-corn-raccoon.sh
+        container: qc.acc_bluesy-aqua-tortoise
+  QC.Doc:
+    repos:
+      github.com/ecmwf/climetlab find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.breezy-cornflower-tortoise.sh
+        container: qc.doc_pretty-gold-bear
+      github.com/ecmwf/climetlab git:
+        commands:
+        - /usr/bin/env sh .sqa/script.hilly-purple-indri.sh
+        container: qc.doc_hilly-amaranth-quail
+      github.com/ecmwf/climetlab markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.flaky-jade-owl.sh
+        container: qc.doc_sickly-tan-markhor
+      github.com/ecmwf/climetlab restructuredtext-lint:
+        commands:
+        - /usr/bin/env sh .sqa/script.bluesy-cobalt-albatross.sh
+        container: qc.doc_seedy-burgundy-flounder
+  QC.Lic:
+    repos:
+      github.com/ecmwf/climetlab licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.shaggy-seashell-dodo.sh
+        container: qc.lic_lanky-linen-spaniel
+  QC.Sec:
+    repos:
+      github.com/ecmwf/climetlab bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.grumpy-silver-mastiff.sh
+        container: qc.sec_bumpy-linen-uakari
+  QC.Sty:
+    repos:
+      github.com/ecmwf/climetlab flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.stinky-sapphire-tuatara.sh
+        container: qc.sty_grumpy-orchid-uakari
+      github.com/ecmwf/climetlab jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.crappy-pear-numbat.sh
+        container: qc.sty_crappy-pumpkin-bee
+      github.com/ecmwf/climetlab rubocop:
+        commands:
+        - /usr/bin/env sh .sqa/script.sunny-salmon-avocet.sh
+        container: qc.sty_nerdy-auburn-rattlesnake
+  QC.Ver:
+    repos:
+      github.com/ecmwf/climetlab get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.sloppy-violet-barracuda.sh
+        container: qc.ver_frumpy-cyan-bombay
+timeout: 5400
